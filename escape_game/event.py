@@ -48,9 +48,8 @@ def random_crystal():
     typing_Ani('규칙: 1 ~ 5 중 하나를 고르기', 0.05)
     typing_Ani('하지만 그 중 1개만이 승리입니다.')
     num = 0
-    real = 0
+    real = random.randint(1, 5)
     for i in range(3):
-        real = random.randint(1, 5)
         num = input('숫자 입력 :')
         if num == real:
             typing_Ani('성공! you win!')
