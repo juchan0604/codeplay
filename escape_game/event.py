@@ -3,6 +3,8 @@ import random
 
 from time import sleep
 
+crystal = 0
+
 def typing_Ani(text, speed):
     string = text
     for letter in string: 
@@ -12,18 +14,52 @@ def typing_Ani(text, speed):
     print("") 
 
 
-def balltle():
+def battle_1():
+    typing_Ani('로봇기술자 : 저건 뭐지?', 0.05)
+    typing_Ani('로봇기술자 : 해파리네.', 0.05)
+    typing_Ani('로봇기술자 : 잠깐만... 저자식이 나 공격하려는거 같은데?')
+    typing_Ani('로봇기술자 : 몸은 몸으로 갚아야지. 함 뜨자!')
+    typing_Ani('전투 시작')
+    hp = 150
+    enemy_hp = 50
+    attack = 25
+    enemy_attack = 15
+    block = 10
+    on = 0
+    while hp < 1 or enemy_hp < 1:
+        action = input('행동 선택 (1.공격 2.방어 3.정보 4.상태) : ')
+        if action == '1':
+            typing_Ani(f'공격했다! 해파리는 {attack}데미지를 입었다.', 0.05)
+            enemy_hp -= attack
+        elif action == '2':
+            typing_Ani(f'이번 턴은 방어한다! {block} 만큼 방어력이 올랐다.', 0.05)
+            on = 1
+        elif action == '3':
+            typing_Ani('바다해파리다. 졸병처럼 보인다.', 0.05)
+            typing_Ani(f'공격력은 {enemy_attack}, 현재 체력은 {enemy_hp}이다.', 0.05)
+        elif action == '4':
+            typing_Ani(f'내 현재 체력은 {hp}이다.', 0.05)
+        if on == 1:
+            typing_Ani(f'적이 공격했지만 방어했다. {enemy_attack - block} 데미지를 입었다.', 0.05)
+            hp -= (enemy_attack - block)
+        else:
+            typing_Ani(f'적이 공격했다. {enemy_attack} 데미지를 입었다.', 0.05)
+            hp -= enemy_attack
+    if hp <= 0:
+        typing_Ani('사망', 0.05)
+    elif enemy_hp <= 0:
+        typing_Ani('승리했다.', 0.05)
+def battle_2():   
     '''
-    1. 해파리 : 체력 50 나는 체력 150
-    1-1. 공격력 : 나는 일반공격 25 해파리는 15
-    1-2. 방어 : 방어 시 방어력이 10 상승
-    2. 심해 물고기 : 나는 체력 250 물고기 체력 125
-    2-1. 공격력 : 물고기 45
-    2-2. 방어 : 방어 시 방어력이 25 상승
-    3. 보스전(크라켄) : 체력 400 나는 체력 300
-    3-1. 공격력 : 크라켄 70
-    3-2. 방어 : 방어시 방어력이 50 상승
+    2. 심해 물고기 : 나는 체력 250 물고기 체력 125 , 공격력 : 물고기 45 , 방어 : 방어 시 방어력이 25 상승
     '''
+def boss():
+    '''
+    3. 보스전(크라켄) : 체력 400 나는 체력 300 , 공격력 : 크라켄 70 , 방어 : 방어시 방어력이 50 상승
+    
+    '''
+    
+
 
 def lv_up():
     '''
@@ -60,21 +96,57 @@ def random_crystal():
     
     return crystal
 def read_it():
+    crystal = 0
+    ok = 0
     typing_Ani('돌판 : [여기에 있는 주문을 거꾸로 외워라.]')
     typing_Ani('돌판 : [그러면 하나를 얻을 것이니라.]')
-    typing_Ani('로봇기술자 : 이 돌판에 적힌 대로 해 봐야겠어.')
+    typing_Ani('로봇기술자 : 이 돌판에 적힌 대로 해봐야겠어.')
     typing_Ani('규칙 : 제시된 텍스트를 거꾸로 입력하세요.')
     list = ['when_you_collect_all_4_crystals', 'the_door_to_the_boss_room_will_open.',
              'if_you_defeat_that_evil_monster', 'you_will_be_able_to_escape_from_here']
+    unlist = []
     for i in list:
-        print(i[::-1])
+        unlist.append(i[::-1])
+    for i in unlist:
+        print(i)    
+        answer = input('주문 입력 : ')
+        while ok == 4:
+            if answer == list[i]:
+                typing_Ani('땅이 움직인다!')
+                ok += 1
+            else:
+                typing_Ani('주문이 틀린 것 같아.')
+        typing_Ani('땅이 열리고 크리스탈이 나타났다!')
+        crystal += 1
+
+    return crystal
 def password():
-    '''
-    1. 비밀번호 입력
-    1-1. 방법 : 야구 게임 방식으로 비밀번호 찍기
-    1-2. 보상 : 연료 크리스탈
-    
-    '''
+    crystal = 0
+    no = 0
+    yes = 0
+    typing_Ani('로봇기술자 : 이 상자는 뭐지?', 0.05)
+    typing_Ani('로봇기술자 : (아래 돌 버튼이 있다.)', 0.05)
+    typing_Ani('로봇기술자 : 버튼을 눌러볼까?', 0.05)
+    typing_Ani('규칙 : 1자리 비밀번호를 3번 연속 맞추세요. 기회 10번', 0.05)
+    random_password = random.randint(0, 9)  
+    while yes < 3:
+        if no != 10:
+            if random_password == int(input('비밀번호 입력 : ')):
+                yes += 1
+                typing_Ani('비밀번호 일치', 0.05)
+                random_password = random.randint(0, 9)  
+            else:
+                no += 1
+                typing_Ani('비밀번호 불일치', 0.05)
+        else:
+            typing_Ani('비밀번호가 리셋됩니다.', 0.05)
+            yes = 0
+            no = 0
+            random_password = random.randint(0, 9)  
+    typing_Ani('성공! 상자가 열렸습니다.')
+    crystal += 1
+    return crystal
+            
 
 def story():
 
