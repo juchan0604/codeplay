@@ -17,42 +17,87 @@ def typing_Ani(text, speed):
 def battle_1():
     typing_Ani('로봇기술자 : 저건 뭐지?', 0.05)
     typing_Ani('로봇기술자 : 해파리네.', 0.05)
-    typing_Ani('로봇기술자 : 잠깐만... 저자식이 나 공격하려는거 같은데?')
-    typing_Ani('로봇기술자 : 몸은 몸으로 갚아야지. 함 뜨자!')
-    typing_Ani('전투 시작')
+    typing_Ani('로봇기술자 : 맛있겠다.', 0.05)
+    typing_Ani('로봇기술자 : 잡아서 해파리냉채로 만들어 먹어야쥐^^', 0.05)
+    typing_Ani('팁 : 공격을 하고 3분의 1로 공격을 피할 수 있습니다.')
+    typing_Ani('전투 시작', 0.05)
     hp = 150
     enemy_hp = 50
     attack = 25
     enemy_attack = 15
     block = 10
     on = 0
+    answer = 0
+    run = 0
     while hp < 1 or enemy_hp < 1:
-        action = input('행동 선택 (1.공격 2.방어 3.정보 4.상태) : ')
+        run = random.randint(1, 3)
+        typing_Ani(f'해파리 체력 : {enemy_hp}, 내 체력 : {hp}')
+        action = input('행동 선택 (1.공격 2.방어) : ')
         if action == '1':
             typing_Ani(f'공격했다! 해파리는 {attack}데미지를 입었다.', 0.05)
             enemy_hp -= attack
         elif action == '2':
             typing_Ani(f'이번 턴은 방어한다! {block} 만큼 방어력이 올랐다.', 0.05)
             on = 1
-        elif action == '3':
-            typing_Ani('바다해파리다. 졸병처럼 보인다.', 0.05)
-            typing_Ani(f'공격력은 {enemy_attack}, 현재 체력은 {enemy_hp}이다.', 0.05)
-        elif action == '4':
-            typing_Ani(f'내 현재 체력은 {hp}이다.', 0.05)
         if on == 1:
             typing_Ani(f'적이 공격했지만 방어했다. {enemy_attack - block} 데미지를 입었다.', 0.05)
             hp -= (enemy_attack - block)
         else:
-            typing_Ani(f'적이 공격했다. {enemy_attack} 데미지를 입었다.', 0.05)
-            hp -= enemy_attack
+            answer = input('피할 곳을 선택하세요 (1 ~ 3) :')
+            if answer == run:
+                typing_Ani('공격을 회피했다!', 0.05)
+            else:
+                typing_Ani(f'적이 공격했다. {enemy_attack} 데미지를 입었다.', 0.05)
+                hp -= enemy_attack
+
     if hp <= 0:
         typing_Ani('사망', 0.05)
     elif enemy_hp <= 0:
         typing_Ani('승리했다.', 0.05)
 def battle_2():   
-    '''
-    2. 심해 물고기 : 나는 체력 250 물고기 체력 125 , 공격력 : 물고기 45 , 방어 : 방어 시 방어력이 25 상승
-    '''
+    
+    #2. 심해 물고기 : 나는 체력 250 물고기 체력 200 , 공격력 : 물고기 45 , 방어 : 방어 시 방어력이 25 상승
+    typing_Ani('심해어 : 친입자다. 근데 못생겼다.', 0.05)
+    typing_Ani('심해어 : 못생겨서 죽이겠다!!!', 0.05)
+    typing_Ani('로봇기술자 : 니가 더 못생겼거든!!', 0.05)
+    typing_Ani('로봇기술자 : 내가 너 죽이면 회썰어줄게;;', 0.05)
+    typing_Ani('크리스탈 소드를 얻어 최대 공격력이 오르는 대신 데미지가 0 ~ 70 까지 랜덤입니다.', 0.05)
+    typing_Ani('해파리 냉채를 먹어 그 외 능력치도 올랐습니다.', 0.05)
+    typing_Ani('전투 시작', 0.05)
+    
+    hp = 250
+    enemy_hp = 125
+    attack = 0
+    enemy_attack = 45
+    block = 25
+    on = 0
+    run = 0
+    answer = 0
+    while hp < 1 or enemy_hp < 1:
+        attack = random.randint(0, 70)
+        run = random.randint(1, 3)
+        typing_Ani(f'심해어 체력 : {enemy_hp}, 내 체력 : {hp}, 이번 턴 공격력 : {attack}', 0.05)
+        action = input('행동 선택 (1.공격 2.방어) : ')
+        if action == '1':
+            typing_Ani(f'공격했다! 심해어는 {attack}데미지를 입었다.', 0.05)
+            enemy_hp -= attack
+        elif action == '2':
+            typing_Ani(f'이번 턴은 방어한다! {block} 만큼 방어력이 올랐다.', 0.05)
+            on = 1
+        if on == 1:
+            typing_Ani(f'적이 공격했지만 방어했다. {enemy_attack - block} 데미지를 입었다.', 0.05)
+            hp -= (enemy_attack - block)
+        else:
+            answer = input('피할 곳을 선택하세요 (1 ~ 3) :')
+            if answer == run:
+                typing_Ani('공격을 회피했다!', 0.05)
+            else:
+                typing_Ani(f'적이 공격했다. {enemy_attack} 데미지를 입었다.', 0.05)
+                hp -= enemy_attack
+    if hp <= 0:
+        typing_Ani('사망', 0.05)
+    elif enemy_hp <= 0:
+        typing_Ani('승리했다.', 0.05)
 def boss():
     '''
     3. 보스전(크라켄) : 체력 400 나는 체력 300 , 공격력 : 크라켄 70 , 방어 : 방어시 방어력이 50 상승
@@ -74,34 +119,35 @@ def lv_up():
 def random_crystal():
     crystal = 0
     typing_Ani('야바위꾼 심해어 : 넌 누구냐?', 0.05)
-    typing_Ani('로봇기술자 : 나는 이곳에서 탈출하려는 사람이다.', 0.05)
-    typing_Ani('야바위꾼 심해어  : 그려냐? 인간주제에 여기서 어떻게 탈출한다는 거지?', 0.05)
-    typing_Ani('로봇기술자 : 이렇게 생긴 걸 모으면 탈출할 수 있어.', 0.05)
-    typing_Ani('로봇기술자 : (크리스탈을 보여준다.)', 0.05)
-    typing_Ani('야바위꾼 심해어  : 오 마침 나에게 비슷한 게 있는데.', 0.05)
-    typing_Ani('야바위꾼 심해어: 그럼 나랑 게임을 해서 이기면 이걸 주지. 기회는 3번', 0.05)
-    typing_Ani('로봇기술자 : 알겠어. 한번 불어보자!', 0.05)
-    typing_Ani('규칙: 1 ~ 5 중 하나를 고르기', 0.05)
-    typing_Ani('하지만 그 중 1개만이 승리입니다.')
+    typing_Ani('로봇기술자 : 나는 이곳에서 탈출하려는 로쟁이다.', 0.05)
+    typing_Ani('야바위꾼 심해어  : 닝겐주제에 여기서 어떻게 탈출한다는 거지?', 0.05)
+    typing_Ani('로봇기술자 : moon - crystal을 모으면 탈출할 수 있어.', 0.05)
+    typing_Ani('(크리스탈을 보여준다.)', 0.05)
+    typing_Ani('야바위꾼 심해어  : 오 마침 나에게 그게 있는데.', 0.05)
+    typing_Ani('야바위꾼 심해어: 나랑 야바위을 해서 이기면 이걸 주지. 기회는 3번', 0.05)
+    typing_Ani('로봇기술자 : ㅇㅇ 뜨자', 0.05)
+    typing_Ani('규칙: 1 ~ 5 중 하나를 고르세요', 0.05)
+    typing_Ani('하지만 그 중 1개만 이길 수 있는 카드입니다.', 0.05)
     num = 0
     real = random.randint(1, 5)
     for i in range(3):
         num = input('숫자 입력 :')
         if num == real:
-            typing_Ani('성공! you win!')
+            typing_Ani('성공! you win!', 0.05)
             crystal + 1
             break
         else:
-            typing_Ani('실패! try again!')
+            typing_Ani('실패! try again!', 0.05)
     
     return crystal
 def read_it():
     crystal = 0
     ok = 0
-    typing_Ani('돌판 : [여기에 있는 주문을 거꾸로 외워라.]')
-    typing_Ani('돌판 : [그러면 하나를 얻을 것이니라.]')
-    typing_Ani('로봇기술자 : 이 돌판에 적힌 대로 해봐야겠어.')
-    typing_Ani('규칙 : 제시된 텍스트를 거꾸로 입력하세요.')
+    typing_Ani('돌판 : [여기에 있는 주문을 거꾸로 외워라.]', 0.05)
+    typing_Ani('돌판 : [그러면 하나를 얻을 것이니라.]', 0.05)
+    typing_Ani('로봇기술자 : 주문외우기 정도면 날먹이지.', 0.05)
+    typing_Ani('로봇기술자 : 이 글자가 주문인것 같은데 읽어볼까?')
+    typing_Ani('규칙 : 제시된 텍스트를 거꾸로 입력하세요.', 0.05)
     list = ['when_you_collect_all_4_crystals', 'the_door_to_the_boss_room_will_open.',
              'if_you_defeat_that_evil_monster', 'you_will_be_able_to_escape_from_here']
     unlist = []
@@ -112,11 +158,11 @@ def read_it():
         answer = input('주문 입력 : ')
         while ok == 4:
             if answer == list[i]:
-                typing_Ani('땅이 움직인다!')
+                typing_Ani('땅이 움직인다!', 0.05)
                 ok += 1
             else:
-                typing_Ani('주문이 틀린 것 같아.')
-        typing_Ani('땅이 열리고 크리스탈이 나타났다!')
+                typing_Ani('주문이 틀린 것 같아.', 0.05)
+        typing_Ani('땅이 열리고 크리스탈이 나타났다!', 0.05)
         crystal += 1
 
     return crystal
@@ -125,7 +171,7 @@ def password():
     no = 0
     yes = 0
     typing_Ani('로봇기술자 : 이 상자는 뭐지?', 0.05)
-    typing_Ani('로봇기술자 : (아래 돌 버튼이 있다.)', 0.05)
+    typing_Ani('(아래 돌 버튼이 있다.)', 0.05)
     typing_Ani('로봇기술자 : 버튼을 눌러볼까?', 0.05)
     typing_Ani('규칙 : 1자리 비밀번호를 3번 연속 맞추세요. 기회 10번', 0.05)
     random_password = random.randint(0, 9)  
@@ -143,7 +189,7 @@ def password():
             yes = 0
             no = 0
             random_password = random.randint(0, 9)  
-    typing_Ani('성공! 상자가 열렸습니다.')
+    typing_Ani('성공! 상자가 열렸습니다.', 0.05)
     crystal += 1
     return crystal
             
@@ -152,20 +198,14 @@ def story():
 
     #1.처음
     typing_Ani("로봇기술자 : 난 이게임의 주인공이다.", 0.05)
-    typing_Ani("로봇기술자 : 희귀한 광물을 얻으러 출장을 나왔지.", 0.05)
-    typing_Ani("로봇기술자 : 이번에 나는 한 심해동굴을 탐사할거야.", 0.05)
-    typing_Ani("로봇기술자 : 하지만 이 동굴에는 한번 들어가면 다시 못나온다는 전설이 있던데...", 0.05)
-    typing_Ani("로봇기술자 : 아 설마 진짜겠어??.", 0.05)
-    typing_Ani("로봇기술자 : 이번에 일 잘하면 승진도 시켜주신다는데 당연히 가야지!!", 0.05)
-    typing_Ani("로봇기술자 : 그래도 조금 고민되는데...", 0.05)
-    typing_Ani("출장을 가시겠습니까? (y/n) :", 0.05)
-    # '[가자]를 선택'
-    # typing_Ani("로봇기술자 : 함 가보자!", 0.05)
-            
-    # '[가지 말자]를 선택'
-    # typing_Ani("로봇기술자 : 혹시 모르니까 가지 말자.", 0.05)
-    # typing_Ani("상사 : 뭐?? 출장을 안 가?!? 감히 상사의 말을 거역하다니... 넌 해고야!!! ", 0.05)
-    # '아무것도 고르지 않거나 다른 것을 타이핑한 경우'
-    # typing_Ani("로봇기술자 : 다시 생각해보자.", 0.05)
-    
+    typing_Ani("로봇기술자 : 희귀한 광물을 얻으러 출장을 나왔다.", 0.05)
+    typing_Ani("로봇기술자 : 이번에 나는 한 심해동굴을 탐사할거다.", 0.05)
+    typing_Ani("로봇기술자 : 이 동굴은 들어가면 다시 못나온다고 했다.", 0.05)
+    typing_Ani("로봇기술자 : 하지만 난 그 말을 무시하고 그대로 들어갔다", 0.05)
+    typing_Ani("로봇기술자 : 이번 일도 실패하면 난 해고되기 때문이다.", 0.05)
+    typing_Ani("로봇기술자 : 해고되면 우리 가족은 뭘 먹고 살라느-", 0.05)
+    typing_Ani("(잠수함 충돌)", 0.05)
+    typing_Ani("[당신은 심해동굴에서 탈출해야 합니다.]", 0.05)
+    typing_Ani("[4]개의 크리스탈을 모으면 당신을 [탈출] 시켜드리겠습니다.", 0.05)
+    typing_Ani("회썰러나간 로봇쟁이 시작")
 story()
