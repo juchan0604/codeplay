@@ -78,7 +78,7 @@ def move(room_name, walls, direction):
     elif room_name == "room05":
         if walls[direction - 1] == 1:
             if direction -1 == 2:
-                nextRoom = "room4"
+                nextRoom = "room04"
                 print(f'{nextRoom}으로 가볼까?')
 
         else:
@@ -86,7 +86,7 @@ def move(room_name, walls, direction):
     elif room_name == "room06":
         if walls[direction - 1] == 1:
             if direction -1 == 3:
-                nextRoom = "room4"
+                nextRoom = "room04"
                 print(f'{nextRoom}으로 가볼까?')
 
         else:
@@ -106,7 +106,7 @@ def move(room_name, walls, direction):
     elif room_name == "room08":
         if walls[direction - 1] == 1:
             if direction -1 == 0:
-                nextRoom = "room011"
+                nextRoom = "room11"
                 print(f'{nextRoom}으로 가볼까?')
             elif direction - 1 == 1:
                 nextRoom = "room07"
@@ -138,7 +138,7 @@ def move(room_name, walls, direction):
     elif room_name == "room11":
         if walls[direction - 1] == 1:
             if direction -1 == 1:
-                nextRoom = "room8"
+                nextRoom = "room08"
                 print(f'{nextRoom}으로 가볼까?')
 
         else:
