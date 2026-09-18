@@ -1,0 +1,73 @@
+#         # 지구에서 제일 맛있는 햄버거집 차리기
+# ## 1. 버거 종류(버거, 치킨버거, 오징어버거, 취두부버거, 비건버거, 밥버거)
+#  - 패티 종류 : 쇠고기, 닭고기, 비건패티, 취두부 패티, 오징어 패티
+#     -  쇠고기 7분 닭고기 10분 비건패티 5분 취두부 패티 6분 오징어 패티 9분
+#  - 1개 or 2개 ( + 1000)
+#  - 빵 종류 : 모닝빵, 버터번, 오징어 먹물빵 (+ 500)
+#  - 공통재료 : 피클, 소스, 양파, 토마토, 양상추
+#  - 소스 종류 : 간장, 타르타르, 렌치 소스, 아보카도 
+#  - 추가 옵션 : 원칩, 치즈, 베이컨, 오이, 단무지
+# ## 2. 사이드메뉴의 종류 
+#     1.감튀  m 3000 l 4000
+#     2.치킨너켓 1 500
+#     3.비스킷 1 1500
+#     4.코울슬로 1 2000
+# ## 3.음료 종류
+#     1.닥터페퍼 2000
+#     2.뽀로로음료수 1500
+#     3.맥주 4000
+#     4.코카콜라(레거시) 3000
+
+
+# 햄버거 가게 메뉴 구성을 위한 가이드 슈도 코드
+
+
+# ======================================================================
+class MenuItem:
+    def __init__(self, menu, price, time):
+        self.menu = menu 
+        self.price = price
+        self.time = time
+
+# ======================================================================
+class Burger(MenuItem):
+    def __init__(self, menu, price, patty, many, time, bread = '버터번'):
+        estimeate = (time * many) + 60
+        super().__init__(menu, price, time)
+
+        self.patty = patty
+        self.many = many
+        self.bread = bread
+        self.sold_out = False
+        self.all = ["양파", "양상추", "토마토", "피클"]
+
+# ======================================================================
+class SpecialBurger(Burger):
+    def __init__(self, menu, price, patty, many, time, special):
+        estimeate = (time * many) + 60
+        super().__init__(menu, price, time, patty, many, bread = "먹물빵")
+        self.special = special
+
+# ======================================================================
+class Side(MenuItem):
+    def __init__(self, menu, price, time = 30):
+        super().__init__(menu, price, time)
+# ======================================================================
+class Drink (MenuItem):
+    def __init__(self, menu, price, time = 10):
+        super().__init__(menu, price, time)
+
+# ======================================================================
+class SetMenu():
+    def __init__(self ,burger, side, drink):
+        self.burger = burger
+        self.side = side
+        self.drink = drink
+        self.menu = burger.menu + " 세트"
+   
+        total_price = burger.price + side.price + drink.price
+
+        self.discount = int(total_price * 0.8)
+   
+b1 = Burger('여왕버거', 4900, '소고기', 1,  40 )
+b2 = Burger('')
